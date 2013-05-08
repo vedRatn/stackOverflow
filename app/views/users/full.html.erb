@@ -1,0 +1,50 @@
+
+
+<ul class="users">
+  <% @users.each do |user| %>
+  <li>
+      <% link = "" %>
+      <% if user.website_url.blank? %>
+      <% link = "http://stackoverflow.com/users/#{user.site_id}" %>
+      <% else %>
+      <% link = user.website_url %>
+      <% end %>
+      <h3 class="name"><%= user.name %></h3>
+      <a href = <%= link %> > <img src=<%= user.profile_image %> alt=<%= user.name %> class="profile_image"> </a>
+      <p class = "text"> Location : <%= user.location %>  |  Website : <a href = <%= link %>> <%= link %> </a>   </p> 
+      <p class = "site_id"> StackOverflow ID : <%= user.site_id %></p>
+      <p class="text"> About me </p>
+      <%= user.about_me %>
+      <h3 class="repo">REPUTATION : <%= user.reputation %> </h3>	  
+      <p class="skills">SKILLS : <%= user.skills %> </p>
+      <p class= "skills"> Upvotes : <%= user.up_votes %> | Downvotes : <%= user.down_votes %> </p>
+      <p class = "skills" > Badges Won => gold  : <%= user.badges.split[0] %> | silver  : <%= user.badges.split[1] %> | bronze : <%= user.badges.split[2] %> </p>
+      <h3 class= "qheader"> Top three questions asked</h3>
+      <ol class="questions">
+      <% user.question.each do |question| %>
+        <li>
+          <h3 class = "heading">Questionid : <%= question["id"] %> | <a href = <%= question["link"] %> > <%= question["title"] %> </a> </h3>
+          <%= question["body"] %>
+          <p class= "qtags"> Tags : <%= question["tags"].join(", ") %> </p>
+          <p class="score"> Score : <%= question["score"] %> </p>
+          <p class="score"> Upvotes : <%= question["up_votes"] %> | Downvotes : <%= question["down_votes"] %> </p>
+        </li>
+      <% end %>
+      </ol>
+      <h3 class= "qheader"> Top three answers given</h3>
+      <ol class="questions">
+      <% user.answer.each do |question| %>
+        <li>
+          <h3 class = "heading">Answerid : <%= question["id"] %> | <a href = <%= question["link"] %> > <%= question["title"] %> </a> </h3>
+          <%= question["body"] %>
+          <p class= "qtags"> Tags : <%= question["tags"].join(", ") %> </p>
+          <p class="score"> Score : <%= question["score"] %> </p>
+          <p class="score"> Upvotes : <%= question["up_votes"] %> | Downvotes : <%= question["down_votes"] %> </p>
+        </li>
+      <% end %>
+      </ol>
+      <br><br>
+  </li>
+  <% end %>
+</ul>
+
