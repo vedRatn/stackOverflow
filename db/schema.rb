@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509162244) do
+ActiveRecord::Schema.define(:version => 20130509185940) do
 
   create_table "queries", :force => true do |t|
     t.string   "query"
-    t.string   "user_ids"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "user_ids",   :limit => 255
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "queries", ["query"], :name => "index_queries_on_query", :unique => true
@@ -33,20 +33,20 @@ ActiveRecord::Schema.define(:version => 20130509162244) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "about_me"
+    t.text     "about_me",      :limit => 255
     t.string   "location"
     t.string   "website_url"
     t.string   "reputation"
     t.string   "skills"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "site_id"
     t.string   "profile_image"
     t.integer  "up_votes"
     t.integer  "down_votes"
     t.string   "badges"
-    t.string   "question"
-    t.string   "answer"
+    t.text     "question",      :limit => 255
+    t.text     "answer",        :limit => 255
   end
 
   add_index "users", ["site_id"], :name => "index_users_on_site_id", :unique => true
