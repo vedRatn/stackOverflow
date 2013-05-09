@@ -5,7 +5,7 @@ gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1'
 gem "httparty"
 gem "nokogiri"
-gem 'stack_overflow', '0.0.9'
+gem 'stack_overflow', :git=>'git@github.com:vedRatn/meraStackOverflowAPI.git'
 gem 'bcrypt-ruby', '3.0.1'
 
 gem 'faker', '1.0.1'
