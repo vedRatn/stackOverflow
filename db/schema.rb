@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507185440) do
+ActiveRecord::Schema.define(:version => 20130509162244) do
+
+  create_table "queries", :force => true do |t|
+    t.string   "query"
+    t.string   "user_ids"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "queries", ["query"], :name => "index_queries_on_query", :unique => true
+
+  create_table "records", :force => true do |t|
+    t.integer  "user_id"
+    t.boolean  "bool"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "records", ["user_id"], :name => "index_records_on_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -30,5 +48,7 @@ ActiveRecord::Schema.define(:version => 20130507185440) do
     t.string   "question"
     t.string   "answer"
   end
+
+  add_index "users", ["site_id"], :name => "index_users_on_site_id", :unique => true
 
 end

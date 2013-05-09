@@ -21,7 +21,7 @@
       <p class = "skills" > Badges Won => gold  : <%= user.badges.split[0] %> | silver  : <%= user.badges.split[1] %> | bronze : <%= user.badges.split[2] %> </p>
       <h3 class= "qheader"> Top three questions asked</h3>
       <ol class="questions">
-      <% user.question.each do |question| %>
+      <% JSON.load(user.question).each do |question| %>
         <li>
           <h3 class = "heading">Questionid : <%= question["id"] %> | <a href = <%= question["link"] %> > <%= question["title"] %> </a> </h3>
           <%= question["body"] %>
@@ -33,7 +33,7 @@
       </ol>
       <h3 class= "qheader"> Top three answers given</h3>
       <ol class="questions">
-      <% user.answer.each do |question| %>
+      <% JSON.load(user.answer).each do |question| %>
         <li>
           <h3 class = "heading">Answerid : <%= question["id"] %> | <a href = <%= question["link"] %> > <%= question["title"] %> </a> </h3>
           <%= question["body"] %>
