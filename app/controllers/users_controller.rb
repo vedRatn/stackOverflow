@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
   def full
     @users = Array.new
+    tagwiseScore = {}
     API::StackOverflow.API_KEY= "ufAHdaczqdRiEpKqK5*8xw(("
     page = 1
     pagesize = 30
@@ -63,17 +64,25 @@ class UsersController < ApplicationController
             question["link"] = temp["link"]
             question["title"] = temp["title"]
             question["body"] = Nokogiri::HTML(temp["body"]).inner_text
-            question["up_votes"] = temp["up_vote_count"]
+            upVotes = question["up_votes"] = temp["up_vote_count"]
             question["down_votes"] = temp["down_vote_count"]
             question["score"] = temp["score"]
-           if !temp["tags"].nil?
-              question["tags"] = temp["tags"]
-           else
-             question["tags"] = []
-           end
-           question_array.push(question)            
-         end
-       end
+            if !temp["tags"].nil?
+              skills = question["tags"] = temp["tags"]
+              skills = self.minimise(skills)
+              skills.each{ |s|
+                if tagwiseScore.has_key?(s)
+                  tagwiseScore[s]+=5*upVotes
+                else
+                  tagwiseScore[s]=5*upVotes
+                end
+              }
+            else
+              question["tags"] = []
+            end
+            question_array.push(question)            
+          end
+        end
       end
       if !tempanswer.nil?
        for i in 0..2
@@ -208,6 +217,10 @@ class UsersController < ApplicationController
       q.user_ids = idArray.join(" ")
       q.save
     end
+  end
+
+  def generateTagDatabase
+    
   end
 end
 

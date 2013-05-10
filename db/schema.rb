@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509185940) do
+ActiveRecord::Schema.define(:version => 20130510120639) do
 
   create_table "queries", :force => true do |t|
     t.string   "query"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20130509185940) do
 
   add_index "records", ["user_id"], :name => "index_records_on_user_id", :unique => true
 
+  create_table "tags", :force => true do |t|
+    t.string   "tag"
+    t.text     "synonyms"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tags", ["tag"], :name => "index_tags_on_tag", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.text     "about_me",      :limit => 255
@@ -47,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20130509185940) do
     t.string   "badges"
     t.text     "question",      :limit => 255
     t.text     "answer",        :limit => 255
+    t.text     "tagwise_score"
   end
 
   add_index "users", ["site_id"], :name => "index_users_on_site_id", :unique => true
