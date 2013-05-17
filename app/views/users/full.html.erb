@@ -19,7 +19,20 @@
       <p class="skills">SKILLS : <%= user.skills %> </p>
       <p class= "skills"> Upvotes : <%= user.up_votes %> | Downvotes : <%= user.down_votes %> </p>
       <p class = "skills" > Badges Won => gold  : <%= user.badges.split[0] %> | silver  : <%= user.badges.split[1] %> | bronze : <%= user.badges.split[2] %> </p>
-      <h3 class= "qheader"> Top three questions asked</h3>
+      <h3 class= "qheader"> Tagwise Score</h3>
+      <div id= "divid">
+        <p>
+        <% JSON.load(user.tagwise_score).each do |skill , score| %>
+              <% unless score == 0 %>
+              
+                <%= skill %> : <%= score.round(3) %> &nbsp;
+              
+              <% end %>
+            <% end %>
+        </p>
+      </div>
+
+      <h3> Top three questions asked</h3>
       <ol class="questions">
       <% JSON.load(user.question).each do |question| %>
         <li>
@@ -37,7 +50,9 @@
         <li>
           <h3 class = "heading">Answerid : <%= question["id"] %> | <a href = <%= question["link"] %> > <%= question["title"] %> </a> </h3>
           <%= question["body"] %>
-          <p class= "qtags"> Tags : <%= question["tags"].join(", ") %> </p>
+          <% if !question["tags"].nil? %>
+            <p class= "qtags"> Tags : <%= question["tags"].join(", ") %> </p>
+          <% end %>
           <p class="score"> Score : <%= question["score"] %> </p>
           <p class="score"> Upvotes : <%= question["up_votes"] %> | Downvotes : <%= question["down_votes"] %> </p>
         </li>

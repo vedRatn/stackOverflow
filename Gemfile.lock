@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/vedRatn/meraStackOverflowAPI.git
-  revision: a3041f38eb580aacda94d6292cb54488aa213762
+  remote: git://github.com/vedRatn/NewstackOverflow.git
+  revision: 75487ed1ea5f71fffa7d5042d87fa97a3de024c6
   specs:
     stack_overflow (0.0.9)
 
